@@ -95,7 +95,7 @@ namespace DynamicProgramming
                         myShortestArray = result;
                     }
 
-                    return result;
+                    //return result;
                 }
             }
 
@@ -164,6 +164,47 @@ namespace DynamicProgramming
 
             memo.Add(target, null);
             return null;
+        }
+
+        /// <summary>
+        /// Return array of integers that add up to target
+        /// </summary>
+        /// <param name="target">Target sum</param>
+        /// <param name="numbers">Array of numbers</param>
+        /// <param name="memo">Memo of subproblems solutions</param>
+        /// <returns>Array of numbers or null if none</returns>
+        public static int[] CanSumMemoizationShortestArray(int target, int[] numbers, Dictionary<int, int[]> memo)
+        {
+            if (memo.ContainsKey(target)) { return memo[target]; }
+
+            // handle base cases
+            if (target == 0) { return new int[] { }; } // this path contains parts that add up to target
+            if (target < 0) { return null; } // no valid parts in this path add up to target
+            int[] myShortestArray = null;
+
+            foreach (var number in numbers)
+            {
+                int targetSum = target - number;
+                int[] remainderArray = CanSumMemoizationShortestArray(targetSum, numbers, memo);
+
+                if (remainderArray != null)
+                {
+                    int[] result = new int[remainderArray.Length + 1]; // create room for the new number
+                    remainderArray.CopyTo(result, 0); // move arrays to new bigger array
+                    result[remainderArray.Length] = number; // place new number into the last index of the new array
+
+                    if (myShortestArray == null || result.Length < myShortestArray.Length)
+                    {
+                        //if (!memo.ContainsKey(target)) { memo.Add(target, result); }
+                        memo.Add(target, result); // TODO - fix the error here
+                        myShortestArray = result;
+                    }
+
+                    //return result;
+                }
+            }
+
+            return myShortestArray;
         }
     }
 }

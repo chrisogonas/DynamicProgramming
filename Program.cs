@@ -22,7 +22,8 @@ namespace DynamicProgramming
             //bool temp = TargetSum.CanSumMemoization(2, new int[] { 4, 5, 3 }, new Dictionary<int, bool>());
             //Console.WriteLine(temp);
             //int[] result = TargetSum.CanSumBruteForceArray(300, new int[] { 9, 150, 3 });
-            int[] result = TargetSum.CanSumBruteForceShortestArray(300, new int[] { 9, 150, 3 });
+            //int[] result = TargetSum.CanSumBruteForceShortestArray(300, new int[] { 9, 150, 3 });
+            int[] result = TargetSum.CanSumMemoizationShortestArray(300, new int[] { 9, 150, 3 }, new Dictionary<int, int[]>());
             //int[] result = TargetSum.CanSumMemoizationArray(300099, new int[] { 98, 153, 33 }, new Dictionary<int, int[]>());
 
             if (result is null)
