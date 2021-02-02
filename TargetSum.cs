@@ -45,7 +45,7 @@ namespace DynamicProgramming
         public static int[] CanSumBruteForceArray(int target, int[] numbers)
         {
             // handle base cases
-            if (target == 0) { return new int[]{ }; } // this path contains parts that add up to target
+            if (target == 0) { return new int[] { }; } // this path contains parts that add up to target
             if (target < 0) { return null; } // no valid parts in this path add up to target
 
             foreach (var number in numbers)
@@ -53,7 +53,7 @@ namespace DynamicProgramming
                 int targetSum = target - number;
                 int[] remainderArray = CanSumBruteForceArray(targetSum, numbers);
 
-                if ( remainderArray != null)
+                if (remainderArray != null)
                 {
                     int[] result = new int[remainderArray.Length + 1]; // create room for the new number
                     remainderArray.CopyTo(result, 0); // move arrays to new bigger array
@@ -64,6 +64,42 @@ namespace DynamicProgramming
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Return array of integers that add up to target - shortest path
+        /// </summary>
+        /// <param name="target">Target sum</param>
+        /// <param name="numbers">Array of numbers</param>
+        /// <returns>Array of numbers or null if none</returns>
+        public static int[] CanSumBruteForceShortestArray(int target, int[] numbers)
+        {
+            // handle base cases
+            if (target == 0) { return new int[] { }; } // this path contains parts that add up to target
+            if (target < 0) { return null; } // no valid parts in this path add up to target
+            int[] myShortestArray = null;
+
+            foreach (var number in numbers)
+            {
+                int targetSum = target - number;
+                int[] remainderArray = CanSumBruteForceShortestArray(targetSum, numbers);
+
+                if (remainderArray != null)
+                {
+                    int[] result = new int[remainderArray.Length + 1]; // create room for the new number
+                    remainderArray.CopyTo(result, 0); // move arrays to new bigger array
+                    result[remainderArray.Length] = number; // place new number into the last index of the new array
+
+                    if (myShortestArray == null || result.Length < myShortestArray.Length)
+                    {
+                        myShortestArray = result;
+                    }
+
+                    return result;
+                }
+            }
+
+            return myShortestArray;
         }
 
         /// <summary>
@@ -93,6 +129,41 @@ namespace DynamicProgramming
 
             memo.Add(target, false);
             return false;
+        }
+
+        /// <summary>
+        /// Return array of integers that add up to target
+        /// </summary>
+        /// <param name="target">Target sum</param>
+        /// <param name="numbers">Array of numbers</param>
+        /// <param name="memo">Memo of subproblems solutions</param>
+        /// <returns>Array of numbers or null if none</returns>
+        public static int[] CanSumMemoizationArray(int target, int[] numbers, Dictionary<int, int[]> memo)
+        {
+            if (memo.ContainsKey(target)) { return memo[target]; }
+
+            // handle base cases
+            if (target == 0) { return new int[] { }; } // this path contains parts that add up to target
+            if (target < 0) { return null; } // no valid parts in this path add up to target
+
+            foreach (var number in numbers)
+            {
+                int targetSum = target - number;
+                int[] remainderArray = CanSumMemoizationArray(targetSum, numbers, memo);
+
+                if (remainderArray != null)
+                {
+                    int[] result = new int[remainderArray.Length + 1]; // create room for the new number
+                    remainderArray.CopyTo(result, 0); // move arrays to new bigger array
+                    result[remainderArray.Length] = number; // place new number into the last index of the new array
+
+                    memo.Add(target, result);
+                    return result;
+                }
+            }
+
+            memo.Add(target, null);
+            return null;
         }
     }
 }
