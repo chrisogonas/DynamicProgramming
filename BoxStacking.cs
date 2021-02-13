@@ -35,6 +35,11 @@ namespace DynamicProgramming
         public int[] BoxStacks { get; set; }
         public int[] BoxIndexLocations { get; set; }
 
+        /// <summary>
+        /// Compute the highest box stack
+        /// </summary>
+        /// <param name="boxes">Array of boxes to stack</param>
+        /// <returns>Highest stack</returns>
         public static int GetHighestBoxStack(Box[] boxes)
         {
             Box[] allBoxes = new Box[boxes.Length * 3];
@@ -53,7 +58,7 @@ namespace DynamicProgramming
             }
 
             // compute base areas
-            Console.WriteLine("Box Dimensions");
+            Console.WriteLine("Box Dimensions - before sorting");
             for (int i = 0; i < allBoxes.Length; i++)
             {
                 allBoxes[i].BaseArea = allBoxes[i].Length * allBoxes[i].Width;
@@ -61,16 +66,21 @@ namespace DynamicProgramming
                 // line below purely for debug purposes; can be deleted
                 Console.WriteLine($"{allBoxes[i].Length}, {allBoxes[i].Width}, {allBoxes[i].Height}, {allBoxes[i].BaseArea}");
             }
+            Console.WriteLine();
 
-            // order by base area
+            // order by base area (must be DESCENDING order)
             List<Box> boxesSortedByBaseArea = allBoxes.OrderByDescending(x => x.BaseArea).ToList();
 
-            /* Initialize msh values for all indexes  
-            msh[i] --> Maximum possible Stack Height with box i on top */
+            // Initialize msh values for all indexes  
+            // msh[i] --> Maximum possible Stack Height with box i on top
             int[] msh = new int[allBoxes.Length];
+            Console.WriteLine("Box Dimensions - after sorting by base area");
             for (int i = 0; i < allBoxes.Length; i++)
             {
                 msh[i] = boxesSortedByBaseArea[i].Height;
+
+                // line below purely for debug purposes; can be deleted
+                Console.WriteLine($"{boxesSortedByBaseArea[i].Length}, {boxesSortedByBaseArea[i].Width}, {boxesSortedByBaseArea[i].Height}, {boxesSortedByBaseArea[i].BaseArea}");
             }
 
             for (int i = 0; i < boxesSortedByBaseArea.Count; i++)
@@ -122,5 +132,3 @@ namespace DynamicProgramming
 
     }
 }
-
-
