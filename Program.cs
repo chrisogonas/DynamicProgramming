@@ -23,18 +23,26 @@ namespace DynamicProgramming
             //Console.WriteLine(temp);
             //int[] result = TargetSum.CanSumBruteForceArray(300, new int[] { 9, 150, 3 });
             //int[] result = TargetSum.CanSumBruteForceShortestArray(300, new int[] { 9, 150, 3 });
-            int[] result = TargetSum.CanSumMemoizationShortestArray(300, new int[] { 9, 150, 3 }, new Dictionary<int, int[]>());
+            //int[] result = TargetSum.CanSumMemoizationShortestArray(300, new int[] { 9, 150, 3 }, new Dictionary<int, int[]>());
             //int[] result = TargetSum.CanSumMemoizationArray(300099, new int[] { 98, 153, 33 }, new Dictionary<int, int[]>());
 
-            if (result is null)
-            {
-                Console.WriteLine("None!");
-            } else
-            {
-                Console.WriteLine(String.Join(",", result));
-            }
+            //if (result is null)
+            //{
+            //    Console.WriteLine("None!");
+            //} else
+            //{
+            //    Console.WriteLine(String.Join(",", result));
+            //}
 
-            Console.WriteLine();
+            // Box stacking LIS problem
+            Box[] arr = new Box[4];
+            arr[0] = new Box(4, 6, 7);
+            arr[1] = new Box(1, 2, 3);
+            arr[2] = new Box(4, 5, 6);
+            arr[3] = new Box(10, 12, 32);
+
+            Console.WriteLine("The maximum possible height of stack is " + BoxStacking.GetHighestBoxStack(arr));
+
         }
 
 
