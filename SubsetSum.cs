@@ -6,6 +6,7 @@ namespace DynamicProgramming
 {
     /// <summary>
     /// Given a set of integers and a target integer for sum, find out if the set has a subset that sums up to the target
+    /// NOTE: Same approach can be used to solve the [Total Unique Ways To Make Change] problem
     /// </summary>
     class SubsetSum
     {
