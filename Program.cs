@@ -35,14 +35,18 @@ namespace DynamicProgramming
             //}
 
             // Box stacking LIS problem
-            Box[] arr = new Box[4];
-            arr[0] = new Box(4, 6, 7);
-            arr[1] = new Box(1, 2, 3);
-            arr[2] = new Box(4, 5, 6);
-            arr[3] = new Box(10, 12, 32);
+            //Box[] arr = new Box[4];
+            //arr[0] = new Box(4, 6, 7);
+            //arr[1] = new Box(1, 2, 3);
+            //arr[2] = new Box(4, 5, 6);
+            //arr[3] = new Box(10, 12, 32);
 
-            Console.WriteLine("The maximum possible height of stack is " + BoxStacking.GetHighestBoxStack(arr));
+            //Console.WriteLine("The maximum possible height of stack is " + BoxStacking.GetHighestBoxStack(arr));
 
+            // SUBSET SUM PROBLEM
+            int[] set = new int[] {7, 2, 3, 4};
+            int target = 11;
+            Console.WriteLine($"Array {String.Join(",", set)}, and target {target}, the target has a subset: {SubsetSum.SumHasSubset(set, target)}");
         }
 
 
