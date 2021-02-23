@@ -50,7 +50,7 @@ namespace DynamicProgramming
             {
                 for (int j = 0; j < matrix.GetLength(1); j++)
                 {
-                    if (j - set[i - 1] < 0) // NOTE that set[i-1] refers to array element since there is additional row 0 in the matrix
+                    if (j - set[i - 1] < 0) // NOTE that set[i-1] refers to array element since there is an additional row 0 in the matrix
                     {
                         matrix[i, j] = matrix[i - 1, j];
                     }

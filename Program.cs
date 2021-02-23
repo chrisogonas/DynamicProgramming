@@ -44,9 +44,14 @@ namespace DynamicProgramming
             //Console.WriteLine("The maximum possible height of stack is " + BoxStacking.GetHighestBoxStack(arr));
 
             // SUBSET SUM PROBLEM
-            int[] set = new int[] {7, 2, 3, 4};
-            int target = 11;
-            Console.WriteLine($"Array {String.Join(",", set)}, and target {target}, the target has a subset: {SubsetSum.SumHasSubset(set, target)}");
+            //int[] set = new int[] {7, 2, 3, 4};
+            //int target = 11;
+            //Console.WriteLine($"Array {String.Join(",", set)}, and target {target}, the target has a subset: {SubsetSum.SumHasSubset(set, target)}");
+
+            // PALINDROME PARTITION
+            string input = "ABCD"; // "BBCDDK"; // "ABBACKK"; // 
+            int result = PalindromePartition.GetMinimumPalinCuts(input);
+            Console.WriteLine($"String {input} has {result} palindrome(s) and {result-1} cut(s)/partition(s).");
         }
 
 
